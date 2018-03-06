@@ -3,8 +3,10 @@ pipeline {
     stages {
         stage('Build') {
             agent {
-                image 'maven:3-alpine'
-                args '-v /Users/cshan/.m2:/root/.m2'
+                docker {
+                    image 'maven:3-alpine'
+                    args '-v /Users/cshan/.m2:/root/.m2'
+                }
             }
             steps {
                 sh 'mvn -B -DskipTests clean package'
@@ -13,7 +15,6 @@ pipeline {
         stage('Create Docker Image') {
             agent {
                 node {
-                    label 'any'
                     customWorkspace '/Users/cshan/.jenkins/workspace/eurekaserver-pipeline'
                 }
             }
@@ -26,7 +27,6 @@ pipeline {
         stage('Deploy') {
             agent {
                 node {
-                    label 'any'
                     customWorkspace '/Users/cshan/devops/apps/eurekaserver'
                 }
             }
