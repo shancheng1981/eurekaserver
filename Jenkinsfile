@@ -21,7 +21,7 @@ pipeline {
             }
             steps {
                 sh 'cp ./docker/Dockerfile /Users/cshan/devops/apps/eurekaserver'
-                sh 'cp ./target/eurekaserver-1.0.0.jar /Users/cshan/devops/apps/eurekaserver'
+                sh 'pwd && cp ./target/eurekaserver-1.0.0.jar /Users/cshan/devops/apps/eurekaserver'
                 sh 'cd /Users/cshan/devops/apps/eurekaserver && docker build --rm -t eurekaserver:1.0 .'
             }
         }
