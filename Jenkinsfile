@@ -15,6 +15,7 @@ pipeline {
         stage('Create Docker Image') {
             agent {
                 node {
+                    label 'any'
                     customWorkspace '/Users/cshan/.jenkins/workspace/eurekaserver-pipeline'
                 }
             }
@@ -27,6 +28,7 @@ pipeline {
         stage('Deploy') {
             agent {
                 node {
+                    label 'any'
                     customWorkspace '/Users/cshan/devops/apps/eurekaserver'
                 }
             }
