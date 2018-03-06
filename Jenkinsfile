@@ -16,11 +16,10 @@ pipeline {
             agent {
                 node {
                     label 'master'
-                    customWorkspace '/Users/cshan/.jenkins/workspace/eurekaserver-pipeline'
                 }
             }
             steps {
-                sh 'cp ./docker/Dockerfile /Users/cshan/devops/apps/eurekaserver && cp ./target/eurekaserver-1.0.0.jar /Users/cshan/devops/apps/eurekaserver'
+                sh 'cd /Users/cshan/.jenkins/workspace/eurekaserver-pipeline && cp ./docker/Dockerfile /Users/cshan/devops/apps/eurekaserver && cp ./target/eurekaserver-1.0.0.jar /Users/cshan/devops/apps/eurekaserver'
                 sh 'cd /Users/cshan/devops/apps/eurekaserver && docker build --rm -t eurekaserver:1.0 .'
             }
         }
@@ -28,11 +27,10 @@ pipeline {
             agent {
                 node {
                     label 'master'
-                    customWorkspace '/Users/cshan/devops/apps/eurekaserver'
                 }
             }
             steps {
-                sh 'docker stop eurekaserver && docker container rm -f eurekaserver && docker run -tid -it -p 9099:9099 --name eurekaserver eurekaserver:1.0'
+                sh 'cd /Users/cshan/devops/apps/eurekaserver && docker stop eurekaserver && docker container rm -f eurekaserver && docker run -tid -it -p 9099:9099 --name eurekaserver eurekaserver:1.0'
             }
         }
     }
