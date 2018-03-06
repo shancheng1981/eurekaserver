@@ -1,4 +1,4 @@
-FROM shancheng1981/jdk8:1.8.0_161
+FROM primetoninc/jdk:1.8
 
 LABEL maintainer="shancheng1981 <19009790@qq.com>"
 
