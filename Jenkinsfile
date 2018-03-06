@@ -20,8 +20,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'cp ./docker/Dockerfile /Users/cshan/devops/apps/eurekaserver'
-                sh 'pwd && cp ./target/eurekaserver-1.0.0.jar /Users/cshan/devops/apps/eurekaserver'
+                sh 'cp ./docker/Dockerfile /Users/cshan/devops/apps/eurekaserver && cp ./target/eurekaserver-1.0.0.jar /Users/cshan/devops/apps/eurekaserver'
                 sh 'cd /Users/cshan/devops/apps/eurekaserver && docker build --rm -t eurekaserver:1.0 .'
             }
         }
@@ -33,9 +32,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'docker stop eurekaserver'
-                sh 'docker container rm -f eurekaserver'
-                sh 'docker run -tid -it -p 9099:9099 --name eurekaserver eurekaserver:1.0'
+                sh 'docker stop eurekaserver && docker container rm -f eurekaserver && docker run -tid -it -p 9099:9099 --name eurekaserver eurekaserver:1.0'
             }
         }
     }
