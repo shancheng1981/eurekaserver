@@ -19,7 +19,7 @@ pipeline {
                 }
             }
             steps {
-                sh './buildDockerImage'
+                sh 'chmod 755 ./buildDockerImage && ./buildDockerImage'
             }
         }
         stage('Deploy') {
@@ -29,7 +29,7 @@ pipeline {
                 }
             }
             steps {
-                sh './deploy'
+                sh 'chmod 755 ./deploy && ./deploy'
             }
         }
     }
