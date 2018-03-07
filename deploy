@@ -1,5 +1,5 @@
 #!/bin/sh
-count=`docker ps -a --no-trunc --filter name=^/eurekaserver$ | wc -l`
+count=`docker ps -aq --no-trunc --filter name=^/eurekaserver$ | wc -l`
 if [ 1 -eq $count ]; then
 docker stop eurekaserver
 fi
