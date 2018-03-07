@@ -19,8 +19,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'cd /Users/cshan/.jenkins/workspace/eurekaserver-pipeline && cp ./docker/Dockerfile /Users/cshan/devops/apps/eurekaserver && cp ./target/eurekaserver-1.0.0.jar /Users/cshan/devops/apps/eurekaserver'
-                sh 'cd /Users/cshan/devops/apps/eurekaserver && docker build --rm -t eurekaserver:1.0 .'
+                sh './buildDockerImage'
             }
         }
         stage('Deploy') {
@@ -30,7 +29,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'cd /Users/cshan/devops/apps/eurekaserver && docker stop eurekaserver && docker container rm -f eurekaserver && docker run -tid -it -p 9099:9099 --name eurekaserver eurekaserver:1.0'
+                sh './deploy'
             }
         }
     }

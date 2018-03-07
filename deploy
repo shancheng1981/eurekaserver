@@ -1,0 +1,6 @@
+#!/bin/sh
+count=`docker ps -a --no-trunc --filter name=^/eurekaserver$ | wc -l`
+if [ 1 -eq $count ]; then
+docker stop eurekaserver
+fi
+docker run -tid --rm -p 9099:9099 --name eurekaserver eurekaserver:1.0

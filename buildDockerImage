@@ -1,0 +1,10 @@
+#!/bin/sh
+count=`docker images -q eurekaserver | wc -l`
+if [ 1 -eq $count ]; then
+docker image rm -f eurekaserver:1.0
+fi
+cd /Users/cshan/.jenkins/workspace/eurekaserver-pipeline
+cp ./docker/Dockerfile /Users/cshan/devops/apps/eurekaserver
+cp ./target/eurekaserver-1.0.0.jar /Users/cshan/devops/apps/eurekaserver
+cd /Users/cshan/devops/apps/eurekaserver
+docker build --rm -t eurekaserver:1.0 .
